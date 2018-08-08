@@ -1,4 +1,4 @@
-package com.maning.robustdemo;
+package com.maning.robustdemo.robust;
 
 import android.content.Context;
 import android.os.Environment;
@@ -22,6 +22,14 @@ import java.util.List;
  * @desc :
  */
 public class PatchesRobustInfoImpl extends PatchManipulate {
+
+    private String currentMD5;
+
+    public void setCurrentMD5(String md5Value) {
+
+        this.currentMD5 = md5Value;
+    }
+
     @Override
     protected List<Patch> fetchPatchList(Context context) {
         //将app自己的robustApkHash上报给服务端，服务端根据robustApkHash来区分每一次apk build来给app下发补丁
@@ -53,6 +61,11 @@ public class PatchesRobustInfoImpl extends PatchManipulate {
     @Override
 
     protected boolean verifyPatch(Context context, Patch patch) {
+        //验证文件的MD5值
+        boolean fileMD5Matched = Utils.isFileMD5Matched(patch.getLocalPath().concat(".jar"), currentMD5);
+        if (!fileMD5Matched) {
+            return false;
+        }
         //do your verification, put the real patch to patch
         //放到app的私有目录
         patch.setTempPath(context.getCacheDir() + File.separator + "robust" + File.separator + "patch");

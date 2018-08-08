@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.maning.robustdemo.robust.RobustManager;
 import com.meituan.robust.Patch;
 import com.meituan.robust.PatchExecutor;
 import com.meituan.robust.RobustCallBack;
@@ -35,36 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void startFixBug() {
         Toast.makeText(this, "开始修复补丁", Toast.LENGTH_SHORT).show();
-        //插入补丁
-        new PatchExecutor(getApplicationContext(), new PatchesRobustInfoImpl(), new RobustCallBack() {
-
-            @Override
-            public void onPatchListFetched(boolean result, boolean isNet, List<Patch> patches) {
-                System.out.println(" robust arrived in onPatchListFetched");
-            }
-
-            @Override
-            public void onPatchFetched(boolean result, boolean isNet, Patch patch) {
-                System.out.println(" robust arrived in onPatchFetched");
-            }
-
-            @Override
-            public void onPatchApplied(boolean result, Patch patch) {
-                System.out.println(" robust arrived in onPatchApplied ");
-
-            }
-
-            @Override
-            public void logNotify(String log, String where) {
-                System.out.println(" robust arrived in logNotify " + where);
-            }
-
-            @Override
-            public void exceptionNotify(Throwable throwable, String where) {
-                throwable.printStackTrace();
-                System.out.println(" robust arrived in exceptionNotify " + where);
-            }
-        }).start();
+        RobustManager.loadPatch(this, "xxxxx");
     }
 
     @Modify

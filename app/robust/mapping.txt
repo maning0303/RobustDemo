@@ -10754,7 +10754,7 @@ com.maning.robustdemo.MainActivity$1 -> com.maning.robustdemo.MainActivity$1:
     void onPatchApplied(boolean,com.meituan.robust.Patch) -> onPatchApplied
     void logNotify(java.lang.String,java.lang.String) -> logNotify
     void exceptionNotify(java.lang.Throwable,java.lang.String) -> exceptionNotify
-com.maning.robustdemo.PatchesRobustInfoImpl -> com.maning.robustdemo.a:
+com.maning.robustdemo.robust.PatchesRobustInfoImpl -> com.maning.robustdemo.a:
     com.meituan.robust.ChangeQuickRedirect changeQuickRedirect -> a
     void <init>() -> <init>
     java.util.List fetchPatchList(android.content.Context) -> fetchPatchList
